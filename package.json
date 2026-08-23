@@ -1,0 +1,10 @@
+{
+  "name": "js-terminal-arena",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "server": "npm run start --prefix server",
+    "client": "npm run start --prefix client",
+    "install:all": "npm install --prefix server && npm install --prefix client"
+  }
+}
