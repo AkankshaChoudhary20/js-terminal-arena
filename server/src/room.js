@@ -130,9 +130,13 @@ export class Room {
   submitAnswer(id, choiceIndex) {
     if (this.state !== 'question') return;
     const p = this.players.get(id);
-    if (!p || p.answeredIndex !== null) return;
+    const question = this.questions[this.questionIndex];
+    const now = Date.now();
+    if (!p || p.answeredIndex !== null || !Number.isInteger(choiceIndex)
+      || choiceIndex < 0 || choiceIndex >= question.choices.length
+      || now - this.questionStartedAt >= QUESTION_TIME_MS) return;
     p.answeredIndex = choiceIndex;
-    p.answeredAt = Date.now();
+    p.answeredAt = now;
     this.maybeAdvanceEarly();
   }
 
