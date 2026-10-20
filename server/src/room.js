@@ -68,6 +68,9 @@ export class Room {
     }
     this.broadcastPlayerList();
     if (this.state === 'question') this.maybeAdvanceEarly();
+    if (this.state === 'lobby' && [...this.players.values()].every((p) => p.ready)) {
+      this.startCountdown();
+    }
   }
 
   broadcastPlayerList() {
@@ -205,3 +208,4 @@ export class RoomManager {
     return room;
   }
 }
+
